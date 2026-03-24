@@ -39,7 +39,7 @@ docker run -d --name openresty-acme \
 
 ```bash
 # 拉取代码
-cd /opt && git clone https://github.com/machsgut/openresty-acme.git && cd openresty-acme
+cd /opt && git clone https://github.com/machs-gut/openresty-acme.git && cd openresty-acme
 
 # 创建持久化目录
 mkdir -p ssl logs conf.d
