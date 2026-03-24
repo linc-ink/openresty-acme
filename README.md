@@ -50,11 +50,13 @@ openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
   -out ssl/selfsigned.crt \
   -subj "/CN=localhost"
 
-# 构建并启动
-docker compose up -d --build
 
-# 不想构建就直接用构建好的镜像
+
+# 嫌麻烦不想构建就直接用构建好的镜像
 docker compose up -d
+
+# 构建并启动
+# docker compose up -d --build
 ```
 
 ## 日志查看
