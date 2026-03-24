@@ -38,8 +38,28 @@ docker run -d --name openresty-acme \
 ## 使用 Docker Compose
 
 ```bash
-docker compose up -d --build
-docker compose logs -f
+mkdir -p /opt/openresty-acme/{ssl,logs,conf.d} && cd /opt/openresty-acme
+cat << 'EOF' > docker-compose.yml
+services:
+  openresty:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: machsgut/openresty-acme:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "127.0.0.1:8443:8443"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ./ssl/:/usr/local/openresty/ssl/
+      - ./logs/:/usr/local/openresty/nginx/logs
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      - ./conf.d/:/usr/local/openresty/nginx/conf.d/:ro
+EOF
+docker compose up -d
 ```
 
 当前 `docker-compose.yml` 默认：
