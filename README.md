@@ -4,10 +4,11 @@
 
 ## 项目说明
 
-- 集成 `nginx-acme` 模块。
+- 集成 `nginx-acme` 模块，支持自动申请、续期证书，配置示例见 `conf.d/demo.com.conf.example`。
 - 镜像内默认包含 `nginx.conf` 与 `conf.d/` 配置，可直接运行。
 - 默认生成占位自签证书，避免首次启动因证书文件缺失失败。
-- 日志同时写入文件和容器标准输出，既可持久化也可 `docker logs` 查看。
+- 支持 SNI 分流域名转发，实现 443 端口转发到特定服务，配置示例见 conf.d/443-preread.stream
+- 配置兜底站点返回444，拦截通过 IP 或未知域名直连的请求，避免默认路由误命中到其他业务站点
 
 ## 目录结构
 
@@ -29,7 +30,7 @@ docker build -t machsgut/openresty-acme:latest .
 
 ```bash
 docker run -d --name openresty-acme \
-  -p 80:80 -p 443:443 -p 8443:8443 \
+  -p 80:80 -p 443:443 -p 127.0.0.1:8443:8443 \
   machsgut/openresty-acme:latest
 ```
 
