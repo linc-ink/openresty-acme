@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: openresty
     image: machsgut/openresty-acme:latest
     restart: unless-stopped
     ports:
