@@ -42,9 +42,6 @@ mkdir -p /opt/openresty-acme/{ssl,logs,conf.d} && cd /opt/openresty-acme
 cat << 'EOF' > docker-compose.yml
 services:
   openresty:
-    build:
-      context: .
-      dockerfile: Dockerfile
     image: machsgut/openresty-acme:latest
     restart: unless-stopped
     ports:
