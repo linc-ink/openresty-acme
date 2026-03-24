@@ -42,7 +42,7 @@ docker run -d --name openresty-acme \
 cd /opt && git clone https://github.com/machsgut/openresty-acme.git && cd openresty-acme
 
 # 创建持久化目录
-mkdir -p /opt/openresty-acme/{ssl,logs,conf.d}
+mkdir -p ssl logs conf.d
 
 # 生成自签证书
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
